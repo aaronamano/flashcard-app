@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import FlashcardList from './components/FlashcardList';
 import NewFlashcardForm from './components/NewFlashcardForm';
+import DeckList from './components/DeckList';
+import NewDeckForm from './components/NewDeckForm';
 
 function App() {
   const [flashcards, setFlashcards] = useState(() => {
@@ -27,11 +29,34 @@ function App() {
     setFlashcards(prevCards => prevCards.filter(card => card.id !== id));
   };
 
+  const [decks, setDecks] = useState(() => {
+    const savedDecks = localStorage.getItem('flashcardDecks');
+    return savedDecks ? JSON.parse(savedDecks) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('flashcardDecks', JSON.stringify(decks));
+  }, [decks]);
+
+  const addDeck = (newDeck) => {
+    setDecks(prevDecks => [...prevDecks, { ...newDeck, id: Date.now(), cards: [] }]);
+  };
+
+  const addCardToDeck = (deckId, newCard) => {
+    setDecks(prevDecks => prevDecks.map(deck => 
+      deck.id === deckId ? { ...deck, cards: [...deck.cards, { ...newCard, id: Date.now() }] } : deck
+    ));
+  };
+
   return (
     <div className="app">
       <h1>Flashcard App</h1>
       <NewFlashcardForm onAddFlashcard={addFlashcard} />
       <FlashcardList flashcards={flashcards} onDeleteFlashcard={deleteFlashcard} />
+
+      <h1>Flashcard Collections</h1>
+      <NewDeckForm onAddDeck={addDeck} />
+      <DeckList decks={decks} onAddCard={addCardToDeck} />
     </div>
   );
 }
