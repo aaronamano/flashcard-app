@@ -2,13 +2,17 @@ import React from 'react';
 import FlashcardList from './FlashcardList';
 import NewFlashcardForm from './NewFlashcardForm';
 
-function Deck({ deck, onAddCard, onDeleteDeck }) {
+function Deck({ deck, onAddCard, onDeleteDeck, onDeleteCard }) {
   const handleAddCard = (newCard) => {
     onAddCard(deck.id, newCard);
   };
 
   const handleDeleteDeck = () => {
     onDeleteDeck(deck.id);
+  };
+
+  const handleDeleteCard = (cardId) => {
+    onDeleteCard(deck.id, cardId);
   };
 
   return (
@@ -18,7 +22,7 @@ function Deck({ deck, onAddCard, onDeleteDeck }) {
         <button onClick={handleDeleteDeck} className="delete-deck-btn">Delete Deck</button>
       </div>
       <NewFlashcardForm onAddFlashcard={handleAddCard} />
-      <FlashcardList flashcards={deck.cards} />
+      <FlashcardList flashcards={deck.cards} onDeleteCard={handleDeleteCard} />
     </div>
   );
 }
