@@ -94,3 +94,23 @@ body {
 .delete-btn:hover {
   background-color: #ff3333;
 }
+
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.delete-deck-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-deck-btn:hover {
+  background-color: #ff3333;
+}

@@ -17,6 +17,7 @@ function App() {
     localStorage.setItem('flashcards', JSON.stringify(flashcards));
   }, [flashcards]);
 
+  //handles individual flashcards by creating and deleting
 
   const addFlashcard = (newCard) => {
     setFlashcards(prevCards => [
@@ -28,6 +29,8 @@ function App() {
   const deleteFlashcard = (id) => {
     setFlashcards(prevCards => prevCards.filter(card => card.id !== id));
   };
+
+  //manages collections of the flashcards
 
   const [decks, setDecks] = useState(() => {
     const savedDecks = localStorage.getItem('flashcardDecks');
@@ -48,15 +51,15 @@ function App() {
     ));
   };
 
+  const deleteDeck = (deckId) => {
+    setDecks(prevDecks => prevDecks.filter(deck => deck.id !== deckId));
+  };
+
   return (
     <div className="app">
       <h1>Flashcard App</h1>
-      <NewFlashcardForm onAddFlashcard={addFlashcard} />
-      <FlashcardList flashcards={flashcards} onDeleteFlashcard={deleteFlashcard} />
-
-      <h1>Flashcard Collections</h1>
       <NewDeckForm onAddDeck={addDeck} />
-      <DeckList decks={decks} onAddCard={addCardToDeck} />
+      <DeckList decks={decks} onAddCard={addCardToDeck} onDeleteDeck={deleteDeck} />
     </div>
   );
 }
