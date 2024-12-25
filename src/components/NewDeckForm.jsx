@@ -17,10 +17,10 @@ function NewDeckForm({ onAddDeck }) {
         type="text"
         value={deckName}
         onChange={(e) => setDeckName(e.target.value)}
-        placeholder="Enter deck name"
+        placeholder="Create Set Name"
         required
       />
-      <button type="submit">Add Deck</button>
+      <button style={{ marginLeft: '5px' }} type="submit">Add Set</button>
     </form>
   );
 }

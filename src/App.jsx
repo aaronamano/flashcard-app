@@ -17,8 +17,6 @@ function App() {
     localStorage.setItem('flashcards', JSON.stringify(flashcards));
   }, [flashcards]);
 
-  //manages collections of the flashcards
-
   const [decks, setDecks] = useState(() => {
     const savedDecks = localStorage.getItem('flashcardDecks');
     return savedDecks ? JSON.parse(savedDecks) : [];
