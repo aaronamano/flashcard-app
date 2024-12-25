@@ -116,3 +116,14 @@ body {
 .delete-deck-btn:hover {
   background-color: #ff3333;
 }
+
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.deck-header button {
+  margin-left: 10px;
+}
