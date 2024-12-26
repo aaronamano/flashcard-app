@@ -1,7 +1,7 @@
 import React from 'react';
 import Deck from './Deck';
 
-function DeckList({ decks, onAddCard, onDeleteDeck, onDeleteCard }) {
+function DeckList({ decks, onAddCard, onDeleteDeck, onDeleteCard, onEditDeckName }) {
   return (
     <div className="deck-list">
       {decks.map(deck => (
@@ -10,7 +10,8 @@ function DeckList({ decks, onAddCard, onDeleteDeck, onDeleteCard }) {
           deck={deck} 
           onAddCard={onAddCard} 
           onDeleteDeck={onDeleteDeck}
-          onDeleteCard={onDeleteCard} 
+          onDeleteCard={onDeleteCard}
+          onEditDeckName={onEditDeckName}
         />
       ))}
     </div>

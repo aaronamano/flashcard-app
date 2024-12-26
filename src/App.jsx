@@ -48,11 +48,22 @@ function App() {
     ));
   };
 
+  const editDeckName = (deckId, newName) => {
+    setDecks(prevDecks => prevDecks.map(deck => 
+      deck.id === deckId ? { ...deck, name: newName } : deck
+    ));
+  };
+
   return (
     <div className="app">
       <h1>Flashcard App</h1>
       <NewDeckForm onAddDeck={addDeck} />
-      <DeckList decks={decks} onAddCard={addCardToDeck} onDeleteDeck={deleteDeck} onDeleteCard={deleteCardFromDeck}/>
+      <DeckList decks={decks} 
+        onAddCard={addCardToDeck} 
+        onDeleteDeck={deleteDeck} 
+        onDeleteCard={deleteCardFromDeck} 
+        onEditDeckName={editDeckName}
+      />
     </div>
   );
 }
