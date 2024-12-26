@@ -89,7 +89,7 @@ function Deck({ deck, onAddCard, onDeleteDeck, onDeleteCard, onEditDeckName }) {
           <button onClick={toggleVisibility}>
             {isVisible ? 'Hide' : 'Show'}
           </button>
-          <button onClick={handleDeleteDeck} className="delete-deck-btn">Delete Deck</button>
+          <button onClick={handleDeleteDeck} className="delete-deck-btn">Delete Set</button>
         </div>
       </div>
       {isVisible && (
