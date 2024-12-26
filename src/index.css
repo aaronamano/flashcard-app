@@ -166,3 +166,14 @@ body {
     font-size: 1em;
   }
 }
+
+/*Carousel Class*/
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+

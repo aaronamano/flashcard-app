@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import FlashcardList from './components/FlashcardList';
 import NewFlashcardForm from './components/NewFlashcardForm';
 import DeckList from './components/DeckList';
 import NewDeckForm from './components/NewDeckForm';

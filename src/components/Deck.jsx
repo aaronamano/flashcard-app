@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FlashcardList from './FlashcardList';
+import Flashcard from './Flashcard';
 import NewFlashcardForm from './NewFlashcardForm';
 
 function Deck({ deck, onAddCard, onDeleteDeck, onDeleteCard, onEditDeckName }) {
@@ -7,6 +7,8 @@ function Deck({ deck, onAddCard, onDeleteDeck, onDeleteCard, onEditDeckName }) {
   const [ isVisible, setIsVisible ] = useState(true);
   const [ isEditing, setIsEditing ] = useState(false);
   const [ editedName, setEditedName ] = useState(deck.name);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+
 
   const handleAddCard = (newCard) => {
     onAddCard(deck.id, newCard);
@@ -38,6 +40,30 @@ function Deck({ deck, onAddCard, onDeleteDeck, onDeleteCard, onEditDeckName }) {
     setIsEditing(false);
   };
 
+  const handlePrevious = () => {
+    setCurrentCardIndex((prevIndex) => 
+      prevIndex === 0 ? deck.cards.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentCardIndex((prevIndex) => 
+      prevIndex === deck.cards.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handleDeleteCurrentCard = () => {
+    if (deck.cards.length > 0) {
+      const currentCardId = deck.cards[currentCardIndex].id;
+      onDeleteCard(deck.id, currentCardId);
+      
+      // Adjust currentCardIndex if necessary
+      if (currentCardIndex === deck.cards.length - 1 && currentCardIndex > 0) {
+        setCurrentCardIndex(currentCardIndex - 1);
+      }
+    }
+  };
+
   return (
     <div className="deck">
       <div className="deck-header">
@@ -61,7 +87,7 @@ function Deck({ deck, onAddCard, onDeleteDeck, onDeleteCard, onEditDeckName }) {
         </div>
         <div className="deck-controls">
           <button onClick={toggleVisibility}>
-            {isVisible ? 'Hide Cards' : 'Show Cards'}
+            {isVisible ? 'Hide' : 'Show'}
           </button>
           <button onClick={handleDeleteDeck} className="delete-deck-btn">Delete Deck</button>
         </div>
@@ -69,7 +95,17 @@ function Deck({ deck, onAddCard, onDeleteDeck, onDeleteCard, onEditDeckName }) {
       {isVisible && (
         <div className="deck-content">
           <NewFlashcardForm onAddFlashcard={handleAddCard} />
-          <FlashcardList flashcards={deck.cards} onDeleteCard={handleDeleteCard} />
+          {deck.cards.length > 0 && (
+            <div className="carousel">
+              <button onClick={handlePrevious}>Previous</button>
+              <Flashcard 
+                card={deck.cards[currentCardIndex]} 
+                onDelete={() => onDeleteCard(deck.id, deck.cards[currentCardIndex].id)}
+              />
+              <button onClick={handleNext}>Next</button>
+              <p>{currentCardIndex + 1} / {deck.cards.length}</p>
+            </div>
+          )}
         </div>
       )}
     </div>
