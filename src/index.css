@@ -143,6 +143,10 @@ body {
     margin: 0;
     margin-right: 10px;
   }
+
+  button {
+    height: 25px;
+  }
 }
 
 .deck-controls {
